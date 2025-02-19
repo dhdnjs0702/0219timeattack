@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { TodoContext } from "../context/TodoProvider";
 
-const List = ({
-  todoTitle,
-  todoContent,
-  setTodoList,
-  todoList,
-  isDone,
-  setIsDone,
-}) => {
+const List = () => {
+  const {
+    todoTitle,
+    todoContent,
+    isDone,
+    todoList,
+    setTodoList,
+    setTodoTitle,
+    setTodoContent,
+  } = useContext(TodoContext);
+
   const handleDone = (item) => {
     // TODO: 완료 처리
     const updatedList = todoList.map((e) => {
@@ -33,22 +37,22 @@ const List = ({
         <StyledListItem key={item.id}>
           <StyledTitle>{item.title}</StyledTitle>
           <StyledContent>{item.content}</StyledContent>
-          <StyledStatus
+          <StyledStatus>{item.isDone ? "완료" : "미완료"}</StyledStatus>
+
+          <StyledButton
             onClick={() => {
               handleDone(item);
             }}
           >
-            {item.isDone ? "완료" : "미완료"}
-          </StyledStatus>
-          
+            {item.isDone ? "취소" : "완료"}
+          </StyledButton>
           <StyledButton
             onClick={() => {
               handleDelete(item);
             }}
           >
-            {item.isDone ? "취소" : "완료"}
+            삭제
           </StyledButton>
-          <StyledButton>삭제</StyledButton>
         </StyledListItem>
       ))}
     </StyledList>

@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { TodoContext } from "../context/TodoProvider";
 
-const Form = ({
-  setTodoContent,
-  setTodoTitle,
-  todoTitle,
-  todoContent,
-  todoList,
-  setTodoList,
-  isDone,
-}) => {
+const Form = () => {
+  const {
+    todoTitle,
+    todoContent,
+    isDone,
+    todoList,
+    setTodoList,
+    setTodoTitle,
+    setTodoContent,
+  } = useContext(TodoContext);
   const onSubmitHandler = (e) => {
     e.preventDefault();
 

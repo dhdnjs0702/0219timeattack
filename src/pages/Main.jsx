@@ -33,23 +33,8 @@ const MainPage = () => {
         <h1>내일배움캠프 스탠다드반 투두리스트</h1>
       </StHeader>
       <StMain>
-        <Form
-          todoTitle={todoTitle}
-          todoContent={todoContent}
-          setTodoContent={setTodoContent}
-          setTodoTitle={setTodoTitle}
-          todoList={todoList}
-          setTodoList={setTodoList}
-          isDone={isDone}
-        />
-        <List
-          todoTitle={todoTitle}
-          todoContent={todoContent}
-          isDone={isDone}
-          setIsDone={setIsDone}
-          todoList={todoList}
-          setTodoList={setTodoList}
-        />
+        <Form />
+        <List />
       </StMain>
       <StFooter>
         <p>Copyright 2025 스파르타 내일배움캠프</p>
