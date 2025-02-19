@@ -33,22 +33,22 @@ const List = ({
         <StyledListItem key={item.id}>
           <StyledTitle>{item.title}</StyledTitle>
           <StyledContent>{item.content}</StyledContent>
-          <StyledStatus
+          <StyledStatus>{item.isDone ? "완료" : "미완료"}</StyledStatus>
+
+          <StyledButton
             onClick={() => {
               handleDone(item);
             }}
           >
-            {item.isDone ? "완료" : "미완료"}
-          </StyledStatus>
-          
+            {item.isDone ? "취소" : "완료"}
+          </StyledButton>
           <StyledButton
             onClick={() => {
               handleDelete(item);
             }}
           >
-            {item.isDone ? "취소" : "완료"}
+            삭제
           </StyledButton>
-          <StyledButton>삭제</StyledButton>
         </StyledListItem>
       ))}
     </StyledList>
