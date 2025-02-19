@@ -1,20 +1,50 @@
 import React from "react";
 import styled from "styled-components";
 
-const Form = () => {
+const Form = ({
+  setTodoContent,
+  setTodoTitle,
+  todoTitle,
+  todoContent,
+  todoList,
+  setTodoList,
+  isDone,
+}) => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    const newTodoList = {
+      id: Date.now(),
+      title: todoTitle,
+      content: todoContent,
+      isDone,
+    };
+
+    setTodoList((prev) => [...prev, newTodoList]);
+    console.log("추가된", todoList);
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={onSubmitHandler}>
       <StyledInput
         type="text"
         name="title"
         placeholder="할 일 제목을 입력하세요"
+        value={todoTitle}
+        onChange={(e) => {
+          setTodoTitle(e.target.value);
+        }}
       />
       <StyledInput
         type="text"
         name="content"
         placeholder="할 일 내용을 입력하세요"
+        value={todoContent}
+        onChange={(e) => {
+          setTodoContent(e.target.value);
+        }}
       />
-      <StyledButton type="submit">추가</StyledButton>
+      <StyledButton>추가</StyledButton>
     </StyledForm>
   );
 };

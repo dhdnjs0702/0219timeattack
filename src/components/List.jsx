@@ -1,44 +1,53 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-const List = () => {
-  // TODO: 샘플 데이터를 지우고 작성해주세요.
-  const SAMPLE_DATA = [
-    {
-      id: 1,
-      title: "할 일 1",
-      content: "할 일 1 내용",
-      isDone: false,
-    },
-    {
-      id: 2,
-      title: "할 일 2",
-      content: "할 일 2 내용",
-      isDone: true,
-    },
-    {
-      id: 3,
-      title: "할 일 3",
-      content: "할 일 3 내용",
-      isDone: false,
-    },
-  ];
-
-  const handleDone = (id) => {
+const List = ({
+  todoTitle,
+  todoContent,
+  setTodoList,
+  todoList,
+  isDone,
+  setIsDone,
+}) => {
+  const handleDone = (item) => {
     // TODO: 완료 처리
+    const updatedList = todoList.map((e) => {
+      return e.id === item.id ? { ...e, isDone: !e.isDone } : e;
+    });
+
+    setTodoList(updatedList);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (item) => {
     // TODO: 삭제 처리
+    const removeAndNewItem = todoList.filter((e) => {
+      return e.id !== item.id;
+    });
+    console.log("삭제된", removeAndNewItem);
+    setTodoList(removeAndNewItem);
   };
 
   return (
     <StyledList>
-      {SAMPLE_DATA.map((item) => (
+      {todoList.map((item) => (
         <StyledListItem key={item.id}>
           <StyledTitle>{item.title}</StyledTitle>
           <StyledContent>{item.content}</StyledContent>
-          <StyledStatus>{item.isDone ? "완료" : "미완료"}</StyledStatus>
-          <StyledButton>{item.isDone ? "취소" : "완료"}</StyledButton>
+          <StyledStatus
+            onClick={() => {
+              handleDone(item);
+            }}
+          >
+            {item.isDone ? "완료" : "미완료"}
+          </StyledStatus>
+          
+          <StyledButton
+            onClick={() => {
+              handleDelete(item);
+            }}
+          >
+            {item.isDone ? "취소" : "완료"}
+          </StyledButton>
           <StyledButton>삭제</StyledButton>
         </StyledListItem>
       ))}
